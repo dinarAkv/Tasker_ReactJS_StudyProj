@@ -1,11 +1,16 @@
 
 th.taskHeader{
-  margin-bottom: 100px;
-  margin-top: 100px;
+  width: 150px;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 td.cellParams{
   width: 150px;
   color: blue;
   text-align: center;
+}
+
+button.addTask{
+  margin-top: 50px;
 }

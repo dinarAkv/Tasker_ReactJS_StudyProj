@@ -16,8 +16,8 @@ const App = ({ tasks }) => {
       <table>
 
         <thead>
-          <tr >
-            <th className='taskHeader' >{headerNameCol}</th>
+          <tr>
+            <th className='taskHeader'>{headerNameCol}</th>
             <th className='taskHeader'>{descriptionNameCol}</th>
           </tr>
         </thead>
@@ -32,16 +32,11 @@ const App = ({ tasks }) => {
         </tbody>
 
       </table>
+
+      <button className='addTask' className='btn btn-success' >Add task</button>
     </div>
   );
-
-
-
-
 }
-
-
-
 
 
 export default connect(
