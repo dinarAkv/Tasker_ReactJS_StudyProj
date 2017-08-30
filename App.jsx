@@ -8,17 +8,23 @@ const App = ({ tasks }) => {
 
   let headerNameCol = "Header";
   let descriptionNameCol = "Description";
+  // let addTaskLink = `/addTask/`;
 
-  console.log('Tasks:' ,tasks);
+
+
+  const addTask = () => {
+
+  }
 
   return(
     <div>
-      <table>
+      <table className='table taskTable'>
 
         <thead>
           <tr>
             <th className='taskHeader'>{headerNameCol}</th>
             <th className='taskHeader'>{descriptionNameCol}</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -27,13 +33,22 @@ const App = ({ tasks }) => {
               <tr key={index} >
                 <td className='cellParams'>{task.title}</td>
                 <td className='cellParams'>{task.description}</td>
+                <td className='iconCell'>
+                  <a><i className="glyphicon glyphicon-pencil"></i></a>
+                </td>
+                <td>
+                  <a><i className='glyphicon glyphicon-remove'></i></a>
+                </td>
               </tr>
            )}
         </tbody>
 
       </table>
 
-      <button className='addTask' className='btn btn-success' >Add task</button>
+      {/* <button className='btn btn-success addTask' >
+        Add task */}
+        <Link className='btn btn-success addTask' to={`/addTask/`}>Add task</Link>
+      {/* </button> */}
     </div>
   );
 }
