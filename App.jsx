@@ -31,7 +31,7 @@ const App = ({ tasks }) => {
         <tbody >
           {tasks.map((task, index) =>
               <tr key={index} >
-                <td className='cellParams'>{task.title}</td>
+                <td className='cellParams'>{task.header}</td>
                 <td className='cellParams'>{task.description}</td>
                 <td>
                   <a><i className="glyphicon glyphicon-pencil"></i></a>

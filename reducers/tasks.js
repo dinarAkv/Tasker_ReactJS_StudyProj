@@ -1,7 +1,7 @@
 const defaultTask = [
   {
     id: 1,
-    title: 'default task',
+    header: 'default task',
     description: ''
   }
 ]
@@ -12,6 +12,7 @@ export default function tasks(state = defaultTask, action){
       ...state,
       action.payload
     ];
+    console.log('ADD_TASK changed');
   }
 
   return state;
