@@ -11,6 +11,10 @@ td.cellParams{
   text-align: center;
 }
 
+table.taskTable{
+  width: 400px;
+}
+
 button.addTask{
   margin-top: 50px;
 }

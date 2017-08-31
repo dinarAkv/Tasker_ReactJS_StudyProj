@@ -8,7 +8,7 @@ const App = ({ tasks }) => {
 
   let headerNameCol = "Header";
   let descriptionNameCol = "Description";
-  // let addTaskLink = `/addTask/`;
+  let addTaskLink = `/addTask/`;
 
 
 
@@ -33,7 +33,7 @@ const App = ({ tasks }) => {
               <tr key={index} >
                 <td className='cellParams'>{task.title}</td>
                 <td className='cellParams'>{task.description}</td>
-                <td className='iconCell'>
+                <td>
                   <a><i className="glyphicon glyphicon-pencil"></i></a>
                 </td>
                 <td>
@@ -45,10 +45,9 @@ const App = ({ tasks }) => {
 
       </table>
 
-      {/* <button className='btn btn-success addTask' >
-        Add task */}
-        <Link className='btn btn-success addTask' to={`/addTask/`}>Add task</Link>
-      {/* </button> */}
+
+        <Link className='btn btn-success addTask' to={addTaskLink}>Add task</Link>
+
     </div>
   );
 }
