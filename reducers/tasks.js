@@ -7,6 +7,9 @@ const defaultTask = [
 ]
 
 export default function tasks(state = defaultTask, action){
+
+  console.log('reducer tasks');
+
   if (action.type === 'ADD_TASK') {
     return [
       ...state,

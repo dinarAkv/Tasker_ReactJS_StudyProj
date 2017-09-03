@@ -46,6 +46,7 @@ const App = ({ tasks }) => {
       </table>
 
 
+
         <Link className='btn btn-success addTask' to={addTaskLink}>Add task</Link>
 
     </div>

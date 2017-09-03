@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
+import {  push } from 'react-router-redux'
 
 import { addTaskAction } from './actions/tasks';
+import  store from './main';
 
 
 
@@ -14,6 +16,8 @@ const TaskCreator = ({ tasks, onAddTask }) => {
 
   let headerInput = '';
   let descriptionInput = '';
+
+  let indexLink = `/`;
 
   const addTask = () => {
     console.log('Add task');
@@ -27,14 +31,14 @@ const TaskCreator = ({ tasks, onAddTask }) => {
       description: descriptionInput.value
     }
 
-    onAddTask(newTask).then(() => {console.log('');});
+    onAddTask(newTask);
 
 
   }
 
   return(
     <div>
-      <form className='form-group'>
+      <form className='form-group' >
         <div>
           <label htmlFor='headerInput'>{headerText}</label>
           <input type='text' className='form-control' id='headerInput' placeholder='Enter header of task'
@@ -46,7 +50,7 @@ const TaskCreator = ({ tasks, onAddTask }) => {
                     ref={(input) => descriptionInput = input}></input>
         </div>
 
-        <button className='btn btn-success' onClick={addTask}>Сохранить</button>
+        <Link className='btn btn-success' to={indexLink} onClick={addTask}>Сохранить</Link>
       </form>
     </div>
   );
@@ -59,12 +63,18 @@ export default connect(
   dispatch => ({
 
     onAddTask: (task) => {
-      const payload = {
-        id: task.id,
-        header: task.header,
-        description: task.description
-      };
-      dispatch({ type: 'ADD_TASK', payload });
+        console.log('onAddTask');
+
+        // dispatch({addTaskAction(task)});
+
+        dispatch(addTaskAction(task)).then((response) => {
+            console.log('success');
+
+
+        }, (response) => {
+            console.log('rejected');
+        });
+
     }
 
 
