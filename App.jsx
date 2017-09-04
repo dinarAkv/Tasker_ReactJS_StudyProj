@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import './styles/app.css';
 import { deleteTaskAction } from './actions/tasks';
+import { editTaskUrl } from './constants/appUrls'
 
 // Main component show list of all tasks in state.
 // And show widgets to edit task or add new.
@@ -37,7 +38,7 @@ const App = ({ tasks, onDeleteTask }) => {
                 <td className='cellParams'>{task.header}</td>
                 <td className='cellParams'>{task.description}</td>
                 <td>
-                  <Link to={'/editTask/' + task.id}><i className="glyphicon glyphicon-pencil"></i></Link>
+                  <Link to={editTaskUrl + task.id}><i className="glyphicon glyphicon-pencil"></i></Link>
                 </td>
                 <td>
                   <Link value={task.id} onClick={() => onDeleteTask(task)}>

@@ -14,13 +14,13 @@ import App from './App.jsx';
 import TaskCreator from './TaskCreator.jsx';
 import TaskEditor from './TaskEditor.jsx';
 import reducer from './reducers';
-import { redirect } from './middlewares/redirect'
+
 
 
 const browserHistoryMiddlware = routerMiddleware(browserHistory);
 const store = createStore(
                           reducer,
-                          composeWithDevTools(applyMiddleware(thunk, browserHistoryMiddlware, redirect))
+                          composeWithDevTools(applyMiddleware(thunk, browserHistoryMiddlware))
 );
 const history = syncHistoryWithStore(hashHistory, store);
 
