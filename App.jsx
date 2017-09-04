@@ -3,18 +3,21 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import './styles/app.css';
+import { deleteTaskAction } from './actions/tasks';
 
-const App = ({ tasks }) => {
+// Main component show list of all tasks in state.
+// And show widgets to edit task or add new.
+const App = ({ tasks, onDeleteTask }) => {
 
   let headerNameCol = "Header";
   let descriptionNameCol = "Description";
   let addTaskLink = `/addTask/`;
 
 
+  // const handleClick = (id) => {
+  //   console.log('id = ', id);
+  // }
 
-  const addTask = () => {
-
-  }
 
   return(
     <div>
@@ -34,10 +37,12 @@ const App = ({ tasks }) => {
                 <td className='cellParams'>{task.header}</td>
                 <td className='cellParams'>{task.description}</td>
                 <td>
-                  <a><i className="glyphicon glyphicon-pencil"></i></a>
+                  <Link to={'/editTask/' + task.id}><i className="glyphicon glyphicon-pencil"></i></Link>
                 </td>
                 <td>
-                  <a><i className='glyphicon glyphicon-remove'></i></a>
+                  <Link value={task.id} onClick={() => onDeleteTask(task)}>
+                    <i className='glyphicon glyphicon-remove'></i>
+                  </Link>
                 </td>
               </tr>
            )}
@@ -46,7 +51,7 @@ const App = ({ tasks }) => {
       </table>
 
 
-
+        {/* // Go to component for adding new task. */}
         <Link className='btn btn-success addTask' to={addTaskLink}>Add task</Link>
 
     </div>
@@ -55,11 +60,19 @@ const App = ({ tasks }) => {
 
 
 export default connect(
-  (state, ownProps) => ({
-    tasks: state.tasks,
-    ownProps
+  (state) => ({
+    // Get all tasks.
+    tasks: state.tasks
   }),
   dispatch => ({
+
+      onDeleteTask: (task) => {
+        console.log('onDeleteTask');
+
+        dispatch(deleteTaskAction(task)).then((response) => {
+            console.log(response);
+        })
+      }
 
   })
 )(App);

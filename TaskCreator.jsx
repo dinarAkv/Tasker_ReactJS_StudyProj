@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, browserHistory } from 'react-router';
-import {  push } from 'react-router-redux'
+import { Link } from 'react-router';
 
 import { addTaskAction } from './actions/tasks';
-import  store from './main';
 
 
 
 
+// Component create new task and save it in state.
 const TaskCreator = ({ tasks, onAddTask }) => {
 
   let headerText = "Header:";
@@ -19,6 +18,8 @@ const TaskCreator = ({ tasks, onAddTask }) => {
 
   let indexLink = `/`;
 
+  // Create new task and call action to save new task
+  // in state.
   const addTask = () => {
     console.log('Add task');
 
@@ -50,7 +51,7 @@ const TaskCreator = ({ tasks, onAddTask }) => {
                     ref={(input) => descriptionInput = input}></input>
         </div>
 
-        <Link className='btn btn-success' to={indexLink} onClick={addTask}>Сохранить</Link>
+        <Link className='btn btn-success' to={indexLink} onClick={addTask}>Save</Link>
       </form>
     </div>
   );
@@ -61,16 +62,12 @@ export default connect(
     tasks: state.tasks
   }),
   dispatch => ({
-
+    // Bind method in action and this component.
     onAddTask: (task) => {
         console.log('onAddTask');
 
-        // dispatch({addTaskAction(task)});
-
         dispatch(addTaskAction(task)).then((response) => {
             console.log('success');
-
-
         }, (response) => {
             console.log('rejected');
         });

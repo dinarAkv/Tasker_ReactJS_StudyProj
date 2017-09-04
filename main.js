@@ -1,9 +1,3 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App.jsx';
-//
-// ReactDOM.render(<App />, document.getElementById('app'));
-
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -18,6 +12,7 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 
 import App from './App.jsx';
 import TaskCreator from './TaskCreator.jsx';
+import TaskEditor from './TaskEditor.jsx';
 import reducer from './reducers';
 import { redirect } from './middlewares/redirect'
 
@@ -36,6 +31,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}/>
       <Route path='/addTask' component={TaskCreator}/>
+      <Route path='/editTask/:id' component={TaskEditor}/>
     </Router>
   </Provider>,
   document.getElementById('app'));
