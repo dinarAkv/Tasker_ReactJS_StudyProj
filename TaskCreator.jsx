@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { addTaskAction } from './actions/tasks';
-
+import { indexUrl } from './constants/appUrls';
 
 
 
@@ -15,8 +15,6 @@ const TaskCreator = ({ tasks, onAddTask }) => {
 
   let headerInput = '';
   let descriptionInput = '';
-
-  let indexLink = `/`;
 
   // Create new task and call action to save new task
   // in state.
@@ -51,7 +49,7 @@ const TaskCreator = ({ tasks, onAddTask }) => {
                     ref={(input) => descriptionInput = input}></input>
         </div>
 
-        <Link className='btn btn-success' to={indexLink} onClick={addTask}>Save</Link>
+        <Link className='btn btn-success' to={indexUrl} onClick={addTask}>Save</Link>
       </form>
     </div>
   );

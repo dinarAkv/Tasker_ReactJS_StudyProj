@@ -14,6 +14,7 @@ import App from './App.jsx';
 import TaskCreator from './TaskCreator.jsx';
 import TaskEditor from './TaskEditor.jsx';
 import reducer from './reducers';
+import { indexUrl, addTaskUrl, editTaskUrl } from './constants/appUrls';
 
 
 
@@ -29,9 +30,9 @@ const history = syncHistoryWithStore(hashHistory, store);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}/>
-      <Route path='/addTask' component={TaskCreator}/>
-      <Route path='/editTask/:id' component={TaskEditor}/>
+      <Route path={indexUrl} component={App}/>
+      <Route path={addTaskUrl} component={TaskCreator}/>
+      <Route path= {editTaskUrl + ':id'} component={TaskEditor}/>
     </Router>
   </Provider>,
   document.getElementById('app'));

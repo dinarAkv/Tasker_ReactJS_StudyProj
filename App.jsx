@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 import './styles/app.css';
 import { deleteTaskAction } from './actions/tasks';
-import { editTaskUrl } from './constants/appUrls'
+import { addTaskUrl, editTaskUrl } from './constants/appUrls'
 
 // Main component show list of all tasks in state.
 // And show widgets to edit task or add new.
@@ -12,13 +12,6 @@ const App = ({ tasks, onDeleteTask }) => {
 
   let headerNameCol = "Header";
   let descriptionNameCol = "Description";
-  let addTaskLink = `/addTask/`;
-
-
-  // const handleClick = (id) => {
-  //   console.log('id = ', id);
-  // }
-
 
   return(
     <div>
@@ -53,7 +46,7 @@ const App = ({ tasks, onDeleteTask }) => {
 
 
         {/* // Go to component for adding new task. */}
-        <Link className='btn btn-success addTask' to={addTaskLink}>Add task</Link>
+        <Link className='btn btn-success addTask' to={addTaskUrl}>Add task</Link>
 
     </div>
   );

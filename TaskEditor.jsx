@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import { editTaskAction } from './actions/tasks';
 import './styles/taskEditor.css';
+import { indexUrl } from './constants/appUrls';
 
 
 // Component to edit task. It change user defined task in state.
@@ -40,7 +41,7 @@ const TaskEditor = ({selectedTask, onEditTask}) => {
                   defaultValue={selectedTask.description}   ref={(input) => descriptionInput = input}></input>
       </div>
 
-      <Link className='btn btn-success saveBtn' onClick={changeTaskInState} to='/'>Save</Link>
+      <Link className='btn btn-success saveBtn' onClick={changeTaskInState} to={indexUrl}>Save</Link>
 
     </div>
   );
