@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 
 import './styles/app.css';
-import { deleteTaskAction } from './actions/tasks';
+// import * as TaskActionCreators  from './actions/tasks';
+import deleteTaskAction from './actions/tasks';
 import { addTaskUrl, editTaskUrl } from './constants/appUrls'
 
 // Main component show list of all tasks in state.
@@ -53,20 +55,29 @@ const App = ({ tasks, onDeleteTask }) => {
 }
 
 
-export default connect(
-  (state) => ({
-    // Get all tasks.
-    tasks: state.tasks
-  }),
-  dispatch => ({
 
-      onDeleteTask: (task) => {
-        console.log('onDeleteTask');
 
-        dispatch(deleteTaskAction(task)).then((response) => {
-            console.log(response);
-        })
-      }
 
-  })
-)(App);
+const mapStateToProps = ({tasks})  => {
+    return {
+      // Get all tasks.
+      tasks: tasks,
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) => ({
+  // onDeleteTask: bindActionCreators(TaskActionCreators, dispatch),
+
+  onDeleteTask: (task) => {
+    console.log('onDeleteTask');
+
+    dispatch(deleteTaskAction(task)).then((response) => {
+        console.log(response);
+    })
+  },
+
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
