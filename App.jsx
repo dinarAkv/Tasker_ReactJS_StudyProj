@@ -4,16 +4,18 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 
 import './styles/app.css';
-// import * as TaskActionCreators  from './actions/tasks';
-import deleteTaskAction from './actions/tasks';
+import * as TaskActionCreators  from './actions/tasks';
 import { addTaskUrl, editTaskUrl } from './constants/appUrls'
+
+
 
 // Main component show list of all tasks in state.
 // And show widgets to edit task or add new.
-const App = ({ tasks, onDeleteTask }) => {
+const App = ({ tasks, taskActions }) => {
 
   let headerNameCol = "Header";
   let descriptionNameCol = "Description";
+
 
   return(
     <div>
@@ -36,7 +38,7 @@ const App = ({ tasks, onDeleteTask }) => {
                   <Link to={editTaskUrl + task.id}><i className="glyphicon glyphicon-pencil"></i></Link>
                 </td>
                 <td>
-                  <Link value={task.id} onClick={() => onDeleteTask(task)}>
+                  <Link value={task.id} onClick={() => taskActions.deleteTaskAction(task)}>
                     <i className='glyphicon glyphicon-remove'></i>
                   </Link>
                 </td>
@@ -59,6 +61,8 @@ const App = ({ tasks, onDeleteTask }) => {
 
 
 const mapStateToProps = ({tasks})  => {
+
+
     return {
       // Get all tasks.
       tasks: tasks,
@@ -66,18 +70,13 @@ const mapStateToProps = ({tasks})  => {
 }
 
 
-const mapDispatchToProps = (dispatch) => ({
-  // onDeleteTask: bindActionCreators(TaskActionCreators, dispatch),
+const mapDispatchToProps = (dispatch) =>
+{
+  return {
+    taskActions: bindActionCreators(TaskActionCreators, dispatch),
+  }
 
-  onDeleteTask: (task) => {
-    console.log('onDeleteTask');
-
-    dispatch(deleteTaskAction(task)).then((response) => {
-        console.log(response);
-    })
-  },
-
-})
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 
 import { editTaskAction } from './actions/tasks';
 import './styles/taskEditor.css';
 import { indexUrl } from './constants/appUrls';
+import * as TaskActionCreators  from './actions/tasks';
 
 
 // Component to edit task. It change user defined task in state.
-const TaskEditor = ({selectedTask, onEditTask}) => {
+const TaskEditor = ({selectedTask, taskActions}) => {
 
   let headerText = "Header:";
   let descriptionText = "Description:";
@@ -24,8 +26,11 @@ const TaskEditor = ({selectedTask, onEditTask}) => {
         description: descriptionInput.value
       }
 
-      onEditTask(editedTask);
+      taskActions.editTaskAction(editedTask);
   }
+
+
+
 
   return(
     <div>
@@ -48,18 +53,15 @@ const TaskEditor = ({selectedTask, onEditTask}) => {
 }
 
 
-export default connect(
-  (state, ownProps) => ({
-    // Find task with specified id.
-    selectedTask: state.tasks.find(task => task.id === Number(ownProps.params.id))
-  }),
-  dispatch => ({
-      onEditTask: (task) => {
-        console.log('Edit task');
 
-        dispatch(editTaskAction(task)).then((response) => {
-          console.log('Edit task reponse:', response);
-        });
-      }
-  })
-)(TaskEditor);
+const mapStateToProps = (state, ownProps) => ({
+  // Find task with specified id.
+  selectedTask: state.tasks.find(task => task.id === Number(ownProps.params.id)),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  taskActions: bindActionCreators(TaskActionCreators, dispatch),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskEditor);

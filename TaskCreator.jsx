@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 
 import { addTaskAction } from './actions/tasks';
 import { indexUrl } from './constants/appUrls';
+import * as TaskActionCreators  from './actions/tasks';
 
 
 
 // Component create new task and save it in state.
-const TaskCreator = ({ tasks, onAddTask }) => {
+const TaskCreator = ({ tasks, taskActions, myVal }) => {
 
   let headerText = "Header:";
   let descriptionText = "Description:";
@@ -30,10 +32,10 @@ const TaskCreator = ({ tasks, onAddTask }) => {
       description: descriptionInput.value
     }
 
-    onAddTask(newTask);
-
-
+    taskActions.addTaskAction(newTask);
   }
+
+
 
   return(
     <div>
@@ -55,23 +57,14 @@ const TaskCreator = ({ tasks, onAddTask }) => {
   );
 }
 
-export default connect(
-  (state) => ({
-    tasks: state.tasks
-  }),
-  dispatch => ({
-    // Bind method in action and this component.
-    onAddTask: (task) => {
-        console.log('onAddTask');
-
-        dispatch(addTaskAction(task)).then((response) => {
-            console.log('success');
-        }, (response) => {
-            console.log('rejected');
-        });
-
-    }
 
 
-  })
-)(TaskCreator);
+const mapStateToProps = (state) => ({
+  tasks: state.tasks,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  taskActions: bindActionCreators(TaskActionCreators, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskCreator);

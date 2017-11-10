@@ -32,10 +32,12 @@ ReactDOM.render(
     <Router history={history}>
       <Route path={indexUrl} component={App}/>
       <Route path={addTaskUrl} component={TaskCreator}/>
-      <Route path= {editTaskUrl + ':id'} component={TaskEditor}/>
+      <Route exact path= {editTaskUrl + ':id'} component={TaskEditor} />
     </Router>
   </Provider>,
   document.getElementById('app'));
 
 
 export default store;
+
+/* component={TaskEditor} */
